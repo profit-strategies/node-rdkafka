@@ -10,6 +10,7 @@ var releaseDir = path.join(baseDir, 'build', 'deps');
 
 var isWin = /^win/.test(process.platform);
 var isLinux = /linux/.test(process.platform);
+var ENVVARS = ""
 
 // Skip running this if we are running on a windows system
 if (isWin) {
@@ -17,11 +18,15 @@ if (isWin) {
   process.exit(0);
 }
 
+//for linux we want to ensure we'll find the desired libkafka.so.1 file. To do this we'are going to tell librdkafka++.so.1 to look in its current path at runtime as an additional location to search for libraries.
+else if (isLinux) {
+    ENVVARS = isLinux ? "LDFLAGS='-Wl,-rpath,\\\$$ORIGIN' " : ""
+}
+
+
 var childProcess = require('child_process');
 
 try {
-  //for linux we want to ensure we'll find the desired libkafka.so.1 file. To do this we'are going to tell librdkafka++.so.1 to look in its current path at runtime as an additional location to search for libraries.
-  var ENVVARS = isLinux ? "LDFLAGS='-Wl,-rpath,$ORIGIN' " : ""
   childProcess.execSync(ENVVARS +  "./configure --prefix=" + releaseDir + ' --libdir=' + releaseDir, {
 
   cwd: baseDir,
