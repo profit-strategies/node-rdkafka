@@ -1,6 +1,6 @@
 {
-  "name": "node-rdkafka",
-  "version": "2.4.1",
+  "name": "@coolfront-npm/node-rdkafka",
+  "version": "2.4.2-psi4",
   "description": "Node.js bindings for librdkafka",
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:Blizzard/node-rdkafka.git"
+    "url": "git@github.com:profit-strategies/node-rdkafka.git"
   },
   "contributors": [
     {
